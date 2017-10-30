@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="30sp"
+    android:paddingBottom="20sp"
+    android:background="@drawable/et_bg"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="Contact details"
+        android:gravity="center"
+        android:layout_marginBottom="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10sp"
+        android:weightSum="2">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".75"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:gravity="end"
+        android:paddingEnd="12sp"
+        android:paddingStart="12sp"
+        android:text="Name :"/>
+        <TextView
+            android:id="@+id/tt_dialog_name"
+            android:layout_width="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:layout_weight="1.25"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10sp"
+        android:layout_marginTop="10sp"
+        android:weightSum="2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".75"
+            android:textColor="@color/colorBlack"
+            android:gravity="end"
+            android:textStyle="bold"
+            android:paddingEnd="12sp"
+            android:paddingStart="12sp"
+            android:text="Phone :"/>
+        <TextView
+            android:id="@+id/tt_dialog_phone"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:autoLink="phone"
+            android:textColorLink="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.25"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10sp"
+        android:layout_marginTop="10sp"
+        android:weightSum="2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:textColor="@color/colorBlack"
+            android:gravity="end"
+            android:textStyle="bold"
+            android:paddingEnd="12sp"
+            android:paddingStart="12sp"
+            android:text="Email :"/>
+        <TextView
+            android:id="@+id/tt_dialog_email"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColorLink="@color/colorPrimary"
+            android:layout_height="wrap_content"
+            android:autoLink="email"
+            android:maxLines="1"
+            android:layout_weight="1.5"/>
+    </LinearLayout>
+    <TextView
+        android:layout_marginTop="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:text="NOTE:- on adding further details, view will be changed to activity"
+        android:maxLines="3"
+        android:gravity="center"
+        android:textColor="#aaa"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:layout_gravity="center"
+        android:paddingStart="20sp"
+        android:paddingEnd="20sp"
+        android:text="ok"
+        android:background="@drawable/et_bg"
+        android:id="@+id/btn_dismiss_dialog"/>
+
+</LinearLayout>
