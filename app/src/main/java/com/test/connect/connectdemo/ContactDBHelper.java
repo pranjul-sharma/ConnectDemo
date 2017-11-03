@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,10 +17,12 @@ import java.util.HashMap;
 
 public class ContactDBHelper extends SQLiteOpenHelper {
 
+    private Context context;
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "contacts_groups.db";
     public ContactDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context ;
     }
 
     @Override
@@ -27,9 +30,9 @@ public class ContactDBHelper extends SQLiteOpenHelper {
         final String CREATE_TABLE_CONTACT = "CREATE TABLE "+ContactContract.ContactEntry.TABLE_NAME+" ( "+
                 ContactContract.ContactEntry._ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 ContactContract.ContactEntry.COL_CONTACT_NAME +" TEXT NOT NULL, "+
-                ContactContract.ContactEntry.COL_CONTACT_EMAIl +" TEXT NOT NULL, "+
-                ContactContract.ContactEntry.COL_CONTACT_PHONE +" INT(10) NOT NULL ," +
-                "CONSTRAINT email_unique UNIQUE("+ ContactContract.ContactEntry.COL_CONTACT_EMAIl+"))";
+                ContactContract.ContactEntry.COL_CONTACT_EMAIl +" TEXT, "+
+                ContactContract.ContactEntry.COL_CONTACT_PHONE +" TEXT NOT NULL," +
+                "CONSTRAINT phone_unique UNIQUE("+ ContactContract.ContactEntry.COL_CONTACT_PHONE+"))";
 
         final String CREATE_TABLE_GROUP = "CREATE TABLE "+ ContactContract.GroupEntry.TABLE_NAME +" ( "+
                 ContactContract.GroupEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
@@ -74,7 +77,6 @@ public class ContactDBHelper extends SQLiteOpenHelper {
 
         long newRowId = database.insert(ContactContract.ContactEntry.TABLE_NAME, null, values);
 
-        Log.v("id",newRowId+"");
         database.close();
         return newRowId;
     }
@@ -116,7 +118,7 @@ public class ContactDBHelper extends SQLiteOpenHelper {
 
                 String name = cursor.getString(1);
                 String email = cursor.getString(2);
-                long phone = Long.parseLong(cursor.getString(3));
+                String phone = cursor.getString(3);
                 Log.v("invalid ",id+" ");
                 list.add(new Contact(id,name,email,phone));
             }while(cursor.moveToNext());
@@ -178,7 +180,7 @@ public class ContactDBHelper extends SQLiteOpenHelper {
                 if (cursor.moveToFirst()) {
                     String name = cursor.getString(1);
                     String email = cursor.getString(2);
-                    long phone = Long.parseLong(cursor.getString(3));
+                    String phone = cursor.getString(3);
                     contact.setName(name);
                     contact.setEmail(email);
                     contact.setPhone(phone);

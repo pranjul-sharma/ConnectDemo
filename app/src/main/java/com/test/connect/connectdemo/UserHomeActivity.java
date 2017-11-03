@@ -1,7 +1,17 @@
 package com.test.connect.connectdemo;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.SharedPreferencesCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -10,6 +20,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +37,7 @@ public class UserHomeActivity extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
+    private static final int MY_PERMISSIONS_REQUEST_CONTACT = 123;
     private ContactDBHelper db;
     private ViewPager mViewPager;
     private FloatingActionMenu fabMenu;
@@ -92,14 +104,69 @@ public class UserHomeActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        SharedPreferences sharedPreferences = this.getSharedPreferences("MyPrefs",MODE_PRIVATE);
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(UserHomeActivity.this,StartActivity.class);
-            Toast.makeText(getApplicationContext(),"User logged out.",Toast.LENGTH_SHORT).show();
-            startActivity(intent);
-            finish();
-            return true;
+        switch(id) {
+            case R.id.action_settings:
+                Intent intent = new Intent(UserHomeActivity.this, StartActivity.class);
+                Toast.makeText(getApplicationContext(), "User logged out.", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.import_device:
+                if (ContextCompat.checkSelfPermission(UserHomeActivity.this,Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(UserHomeActivity.this,Manifest.permission.READ_CONTACTS)) {
+                        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getApplicationContext());
+                        alertBuilder.setCancelable(true);
+                        alertBuilder.setTitle("Permission necessary");
+                        alertBuilder.setMessage("allow permission to save contact from device.");
+                        alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                            public void onClick(DialogInterface dialog, int which) {
+                                ActivityCompat.requestPermissions(UserHomeActivity.this,new String[]{Manifest.permission.READ_CONTACTS}, MY_PERMISSIONS_REQUEST_CONTACT);
+                            }
+                        });
+                        AlertDialog alert = alertBuilder.create();
+                        alert.show();
+                    } else {
+                        ActivityCompat.requestPermissions(UserHomeActivity.this,new String[]{Manifest.permission.READ_CONTACTS}, MY_PERMISSIONS_REQUEST_CONTACT);
+                    }
+                } else {
+                    Intent intent1 = new Intent(UserHomeActivity.this,ContactImportActivity.class);
+                    startActivity(intent1);
+                }
+                return true;
+
+            case R.id.import_facebook:
+                if(!sharedPreferences.getBoolean("FACEBOOK_LOGGED_IN",false)){
+                    //import from facebook code here
+                    Toast.makeText(getApplicationContext(),"import fb code here",Toast.LENGTH_LONG).show();
+                }else{
+                    //request facebook login here
+                    //and then import from facebook code here
+                    Toast.makeText(getApplicationContext(),"login fb code here",Toast.LENGTH_LONG).show();
+                }
+                return true;
+            case R.id.import_google:
+                if(!sharedPreferences.getBoolean("GOOGLE_LOGGED_IN",false)){
+                    //import from facebook code here
+                    Toast.makeText(getApplicationContext(),"import google code here",Toast.LENGTH_LONG).show();
+                }else{
+                    //request facebook login here
+                    //and then import from facebook code here
+                    Toast.makeText(getApplicationContext(),"login google code here",Toast.LENGTH_LONG).show();
+                }
+                return true;
+            case R.id.import_linkedin:
+                if(!sharedPreferences.getBoolean("LINKEDIN_LOGGOD_IN",false)){
+                    //import from facebook code here
+                    Toast.makeText(getApplicationContext(),"import linked in code here",Toast.LENGTH_LONG).show();
+                }else{
+                    //request facebook login here
+                    //and then import from facebook code here
+                    Toast.makeText(getApplicationContext(),"login linkedin code here",Toast.LENGTH_LONG).show();
+                }
+                return true;
         }
 
         return false;
@@ -145,5 +212,22 @@ public class UserHomeActivity extends AppCompatActivity {
         sectionsPagerAdapter.addFragment(GroupListFragment.newInstance(),"Groups");
 
         mViewPager.setAdapter(sectionsPagerAdapter);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        Log.v("tag 3","permission result");
+        if (requestCode == MY_PERMISSIONS_REQUEST_CONTACT) {
+            Log.v("tag 3.0","permission result code match "+MY_PERMISSIONS_REQUEST_CONTACT);
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.v("tag 3.1","permission given");
+                Intent intent = new Intent(UserHomeActivity.this,ContactImportActivity.class);
+                startActivity(intent);
+            } else {
+                //code for deny
+                Log.v("tag 3.2","permission denied");
+                Toast.makeText(getApplicationContext(), "User denied to grant permission", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

@@ -8,4 +8,16 @@
         android:title="logout"
         android:icon="@drawable/ic_logout"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/import_device"
+        android:title="Import from Contacts"/>
+    <item
+        android:id="@+id/import_google"
+        android:title="Import from Google"/>
+    <item
+        android:id="@+id/import_facebook"
+        android:title="Import from Facebook"/>
+    <item
+        android:id="@+id/import_linkedin"
+        android:title="Import from LinkedIn"/>
 </menu>

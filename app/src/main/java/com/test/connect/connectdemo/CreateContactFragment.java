@@ -115,7 +115,7 @@ public class CreateContactFragment extends Fragment {
     private long saveToDb(){
         ContactDBHelper contactDbHelper = new ContactDBHelper(getContext());
         Contact contact = new Contact(etName.getText().toString(),
-             etEmail.getText().toString(),Long.parseLong(etPhone.getText().toString()));
+             etEmail.getText().toString(),etPhone.getText().toString());
         return contactDbHelper.insertRecord(contact);
 
     }

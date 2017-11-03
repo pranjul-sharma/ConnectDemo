@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,9 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 public class ContactListFragment extends Fragment {
 
@@ -36,6 +40,7 @@ public class ContactListFragment extends Fragment {
         final TextView textView = rootView.findViewById(R.id.placeholder_text);
         ContactDBHelper dbHelper = new ContactDBHelper(getContext());
         final ArrayList<Contact> list = dbHelper.readContacts();
+        Collections.sort(list);
         if (list.size()==0) {
             textView.setText("No Contact is saved yet");
             listView.setVisibility(View.GONE);

@@ -17,6 +17,7 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:scrollbars="vertical"
+       android:paddingBottom="50sp"
        android:id="@+id/listview"/>
 
 </LinearLayout>

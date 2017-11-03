@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.test.connect.connectdemo">
-
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,8 +20,10 @@
             android:name=".UserHomeActivity"
             android:label="@string/title_activity_user_home"
             android:theme="@style/AppTheme" />
-        <activity android:name=".DetailSaveActivity"
-            android:parentActivityName=".UserHomeActivity"></activity>
+        <activity
+            android:name=".DetailSaveActivity"
+            android:parentActivityName=".UserHomeActivity" />
+        <activity android:name=".ContactImportActivity"></activity>
     </application>
 
 </manifest>

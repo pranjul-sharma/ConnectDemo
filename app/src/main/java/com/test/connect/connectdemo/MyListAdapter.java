@@ -15,6 +15,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Created by pranjul on 27/10/17.
@@ -54,7 +56,6 @@ public class MyListAdapter extends ArrayAdapter<Contact> {
 
         return view;
     }
-
 
     static class Holder{
         TextView textView;

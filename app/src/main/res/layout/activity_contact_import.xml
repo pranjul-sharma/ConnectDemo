@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.test.connect.connectdemo.ContactImportActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/appbar_padding_top"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_btn"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30sp"
+        android:layout_marginEnd="12sp"
+        android:background="@drawable/et_bg"
+        android:text="import selected"
+        android:id="@+id/btn_select"
+        android:layout_marginBottom="12sp"
+        android:layout_weight="1"
+        android:textColor="@color/colorPrimary"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30sp"
+            android:layout_marginStart="12sp"
+            android:background="@drawable/et_bg"
+            android:layout_weight="1"
+            android:text="import all"
+            android:id="@+id/btn_select_all"
+            android:layout_marginBottom="12sp"
+            android:textColor="@color/colorPrimary"/>
+
+    </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_below="@id/appbar"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_select"
+        android:layout_above="@id/layout_btn"
+        android:layout_marginTop="12sp"
+        android:layout_marginBottom="12sp"
+        android:paddingBottom="12sp"/>
+
+</RelativeLayout>

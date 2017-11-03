@@ -1,24 +1,30 @@
 package com.test.connect.connectdemo;
 
+import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+
+import java.util.Comparator;
+
 /**
  * Created by pranjul on 27/10/17.
  */
 
-public class Contact {
+public class Contact implements Comparable<Contact>{
     int id;
     String name,email;
-    long phone;
+    String phone;
+
 
     public Contact(){
 
     }
 
-    public Contact(String name,String email,long phone){
+    public Contact(String name,String email,String phone){
         this.name = name;
         this.phone = phone;
         this.email = email;
     }
-    public Contact(int id,String name,String email,long phone){
+    public Contact(int id,String name,String email,String phone){
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -48,11 +54,17 @@ public class Contact {
         this.email = email;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    @Override
+    public int compareTo(@NonNull Contact contact) {
+        return (this.getName().compareTo(contact.getName()));
+    }
+
 }
