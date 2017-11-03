@@ -1,9 +1,6 @@
 package com.test.connect.connectdemo;
 
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-
-import java.util.Comparator;
 
 /**
  * Created by pranjul on 27/10/17.
@@ -21,13 +18,14 @@ public class Contact implements Comparable<Contact>{
 
     public Contact(String name,String email,String phone){
         this.name = name;
-        this.phone = phone;
+        this.phone = phone.replaceAll("\\s+","").replaceAll("[-]","");
         this.email = email;
+
     }
     public Contact(int id,String name,String email,String phone){
         this.id = id;
         this.name = name;
-        this.phone = phone;
+        this.phone = phone.replaceAll("\\s+","").replaceAll("[-]","");
         this.email = email;
     }
     public int getId() {
@@ -59,7 +57,7 @@ public class Contact implements Comparable<Contact>{
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = phone.replaceAll("\\s+","").replaceAll("[-]","");
     }
 
     @Override

@@ -145,7 +145,7 @@ public class ContactImportActivity extends AppCompatActivity {
                 cursor.moveToFirst();
                 do{
                     String name = cursor.getString(nameIdx);
-                    String phone = cursor.getString(phoneIdx).replaceAll("\\s+","");
+                    String phone = cursor.getString(phoneIdx);
                     int emailid = Integer.parseInt(cursor.getString(emailIdIdx));
                     Cursor cursor1 = getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI,projectionEmail, ContactsContract.CommonDataKinds.Email.CONTACT_ID+"="+emailid,null,null);
                     String email=null;

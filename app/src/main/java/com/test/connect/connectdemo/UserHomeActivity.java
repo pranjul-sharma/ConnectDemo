@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -24,12 +25,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserHomeActivity extends AppCompatActivity {
 
@@ -38,7 +41,7 @@ public class UserHomeActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private static final int MY_PERMISSIONS_REQUEST_CONTACT = 123;
-    private ContactDBHelper db;
+
     private ViewPager mViewPager;
     private FloatingActionMenu fabMenu;
     private TabLayout tabLayout;
@@ -53,7 +56,6 @@ public class UserHomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        db = new ContactDBHelper(getApplicationContext());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
@@ -88,7 +90,6 @@ public class UserHomeActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     @Override
@@ -97,6 +98,7 @@ public class UserHomeActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_user_home, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -116,7 +118,7 @@ public class UserHomeActivity extends AppCompatActivity {
             case R.id.import_device:
                 if (ContextCompat.checkSelfPermission(UserHomeActivity.this,Manifest.permission.READ_CONTACTS)!= PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.shouldShowRequestPermissionRationale(UserHomeActivity.this,Manifest.permission.READ_CONTACTS)) {
-                        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getApplicationContext());
+                       /* AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getApplicationContext());
                         alertBuilder.setCancelable(true);
                         alertBuilder.setTitle("Permission necessary");
                         alertBuilder.setMessage("allow permission to save contact from device.");
@@ -128,6 +130,9 @@ public class UserHomeActivity extends AppCompatActivity {
                         });
                         AlertDialog alert = alertBuilder.create();
                         alert.show();
+                       */
+                        ActivityCompat.requestPermissions(UserHomeActivity.this,new String[]{Manifest.permission.READ_CONTACTS}, MY_PERMISSIONS_REQUEST_CONTACT);
+
                     } else {
                         ActivityCompat.requestPermissions(UserHomeActivity.this,new String[]{Manifest.permission.READ_CONTACTS}, MY_PERMISSIONS_REQUEST_CONTACT);
                     }
